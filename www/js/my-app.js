@@ -44,7 +44,7 @@ function maponSuccess(position) {
 }
 
 function maponError(error) {
-    alert("the code is " + error.code + ". \n" + "message: " + error.message);
+
 }
 
 function onPhotoURISuccessfarimage(imageData) {
@@ -116,13 +116,6 @@ function onDeviceReady() {
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
 
-
-    /*navigator.geolocation.getCurrentPosition(maponSuccess, maponError, {
-        enableHighAccuracy: true,
-        maximumAge: 60000,
-        timeout: 5000
-    });
-    */
 
 
 }
