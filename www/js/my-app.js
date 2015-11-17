@@ -117,11 +117,12 @@ function onDeviceReady() {
     destinationType = navigator.camera.DestinationType;
 
 
-    navigator.geolocation.getCurrentPosition(maponSuccess, maponError, {
+    /*navigator.geolocation.getCurrentPosition(maponSuccess, maponError, {
         enableHighAccuracy: true,
         maximumAge: 60000,
         timeout: 5000
     });
+    */
 
 
 }
