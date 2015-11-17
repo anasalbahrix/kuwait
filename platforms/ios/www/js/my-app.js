@@ -38,6 +38,9 @@ function maponSuccess(position) {
     var longitude = position.coords.longitude;
     var latitude = position.coords.latitude;
 
+    localStorage.setItem('longitude', longitude);
+    localStorage.setItem('latitude', latitude);
+
 }
 
 function maponError(error) {
@@ -54,8 +57,8 @@ function onPhotoURISuccessfarimage(imageData) {
 
 function onPhotoURISuccesshitsimages(imageData) {
 
-    
-    var image = '<li><a rel="gallery-3" href="'+imageData+'" title="Photo title" class="swipebox"><img width="100%" height="80%" src="'+imageData+'" alt="image"/></a></li>';
+
+    var image = '<li><a rel="gallery-3" href="' + imageData + '" title="Photo title" class="swipebox"><img width="100%" height="80%" src="' + imageData + '" alt="image"/></a></li>';
     $('#photoslist').prepend(image);
 
 }
@@ -113,37 +116,44 @@ function onDeviceReady() {
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
 
-    //navigator.geolocation.getCurrentPosition(maponSuccess, maponError,  {enableHighAccuracy: true,maximumAge:60000, timeout: 5000});
+
+    navigator.geolocation.getCurrentPosition(maponSuccess, maponError, {
+        enableHighAccuracy: true,
+        maximumAge: 60000,
+        timeout: 5000
+    });
+
+
 }
 
 $$(document).on('pageInit', function (e) {
 
 
     /* Custom Code */
-    var today = new Date();
-    var weekLater = new Date().setDate(today.getDate() + 7);
-    var calendarDefault = myApp.calendar({
-        input: '#calendar-default',
-        dateFormat: 'dd / mm / yyyy',
-        events: {
-          from: today,
-          to: weekLater
-        }
-    });   
-
-    var carscounter = 2;
-
-    $('a.addcar').click(function () {
-
-        carscounter++;
-        var element = '<li><div class="item-content"><div class="item-inner"><a href="#" class="removecar" data-remove="' + carscounter + '"><i class="fa fa-times-circle"></i></a>&nbsp;<div class="item-title label">رقم المركبة ' + carscounter + '</div><div class="item-input"><input type="text" name="other_car_number_' + carscounter + '" id="other_car_number"/></div></div></div></li>';
-
-        $('ul.car_numbers_forms').append(element);
+    $calenderInput = $('#calendar-default');
+    if ($calenderInput.length > 0) {
+        var calendarDefault = myApp.calendar({
+            input: '#calendar-default',
+            dateFormat: 'dd / mm / yyyy',
+            closeOnSelect: true
+        });
+    }
 
 
-    });
+    $addcar = $('a.addcar');
+    if ($addcar.length > 0) {
+        var carscounter = 2;
+        $('a.addcar').click(function () {
+
+            carscounter++;
+            var element = '<li><div class="item-content"><div class="item-inner"><a href="#" class="removecar" data-remove="' + carscounter + '"><i class="fa fa-times-circle"></i></a>&nbsp;<div class="item-title label">رقم المركبة ' + carscounter + '</div><div class="item-input"><input type="text" name="other_car_number_' + carscounter + '" id="other_car_number"/></div></div></div></li>';
+
+            $('ul.car_numbers_forms').append(element);
 
 
+        });
+
+    }
 
     /* end Custom Code */
 

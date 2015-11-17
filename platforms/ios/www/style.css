@@ -94,6 +94,12 @@ clear:both;
 float:left; 
 display:block;
 }
+.picker-calendar{
+    direction: ltr;
+}
+.picker-calendar *{
+    direction: ltr;
+}
 a {
 text-decoration: none;
 color: #0c928d;
